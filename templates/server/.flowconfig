@@ -1,0 +1,15 @@
+[ignore]
+
+[include]
+
+[libs]
+flow-typed
+node_modules/flow-declarations/mongoose
+
+[lints]
+
+[options]
+module.system=haste
+esproposal.export_star_as=enable
+
+[strict]

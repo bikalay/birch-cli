@@ -1,0 +1,9 @@
+
+{
+  "name": "${appName}-server",
+  "version": "0.0.1",
+  "description": "${appName} api server",
+  "title": "${appName} API Server",
+  "url" : "https://api.github.com/v1",
+  "sampleUrl": "https://api.github.com/v1"
+}

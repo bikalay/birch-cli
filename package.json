@@ -1,0 +1,27 @@
+{
+  "name": "birch-cli",
+  "version": "0.0.1",
+  "description": "code generation tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "birch-cli": "./bin/birch-cli.js"
+  },
+  "preferGlobal": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bikalay/birch-cli.git"
+  },
+  "author": "Alexandr Vovchuk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bikalay/birch-cli/issues"
+  },
+  "homepage": "https://github.com/bikalay/birch-cli#readme",
+  "dependencies": {
+    "cli-color": "^1.2.0",
+    "ncp": "^2.0.0"
+  }
+}
