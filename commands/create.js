@@ -1,7 +1,9 @@
 var clc = require('cli-color');
+var path = require('path');
 var fs = require('fs');
 var ask = require('./util').ask;
 var ncp = require('ncp').ncp;
+var replaceStream = require('replacestream');
 
 function askProjectName(cb) {
     ask('Project name?: ', cb);
@@ -25,27 +27,37 @@ function createAppConfig(projectName) {
     fs.writeFileSync(projectDir + '/' + projectName + '-birchconfig/project.config.json', JSON.stringify(config, null, '\t'));
 }
 
-// function createServerApp(projectName) {
-//     const source = __dirname+
-//     ncp(source, destination, function (err) {
-//         if (err) {
-//             return console.error(err);
-//         }
-//         console.log('done!');
-//     });
-// }
+function createServerApp(projectName, cb) {
+    const source = path.join(__dirname, '../templates/server/');
+    const destination = path.join(process.cwd() + '/' + projectName + '/' + projectName + '-server');
+    ncp(source, destination, {transform: function(read, write) {
+            read.pipe(replaceStream('${appName}', projectName))
+                .pipe(write);
+        }}, function (err) {
+        if (err) {
+            return console.error(err);
+        }
+        if(cb) {
+            cb();
+        }
+    });
+}
 
 exports.createApp = function createApp(appName) {
     if(appName) {
         createDirectories(appName);
         createAppConfig(appName);
-        return console.log(appName + ' ' + clc.green('created!'));
+        createServerApp(appName, function(){
+            console.log(appName + ' ' + clc.green('created!'));
+        });
     } else {
         askProjectName(function(appName) {
             if(appName) {
                 createDirectories(appName);
                 createAppConfig(appName);
-                return console.log(appName + ' ' + clc.green('created!'));
+                createServerApp(appName, function(){
+                    console.log(appName + ' ' + clc.green('created!'));
+                });
             } else {
                 return console.log(clc.red('App name is undefined'));
             }

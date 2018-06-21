@@ -22,6 +22,7 @@
   "homepage": "https://github.com/bikalay/birch-cli#readme",
   "dependencies": {
     "cli-color": "^1.2.0",
-    "ncp": "^2.0.0"
+    "ncp": "^2.0.0",
+    "replacestream": "^4.0.3"
   }
 }
